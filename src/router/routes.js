@@ -1,4 +1,5 @@
 import layoutHeaderAside from '@/layout/header-aside'
+import layoutNothing from '@/layout/nothing'
 
 // 由于懒加载页面太多的话会造成webpack热更新太慢，所以开发环境不使用懒加载，只有生产环境使用懒加载
 const _import = require('@/libs/util.import.' + process.env.NODE_ENV)
@@ -8,8 +9,8 @@ const _import = require('@/libs/util.import.' + process.env.NODE_ENV)
  */
 const frameIn = [
   {
-    path: '/',
-    redirect: { name: 'index' },
+    path: '/d2',
+    redirect: { name: 'construction' },
     component: layoutHeaderAside,
     children: [
       // 首页
@@ -81,12 +82,31 @@ const frameIn = [
  * 在主框架之外显示
  */
 const frameOut = [
+  {
+    path: '/',
+    redirect: { name: 'construction' },
+    component: layoutNothing,
+    children: [
+      {
+        path: '/web/construction',
+        name: 'construction',
+        component: _import('system/construction')
+      }
+    ]
+  },
   // 登录
   {
     path: '/login',
     name: 'login',
     component: _import('system/login')
   }
+  // 维护
+  // {
+  //   path: '/',
+  //   name: 'construction',
+  //   component: _import('system/construction')
+  // },
+
 ]
 
 /**
